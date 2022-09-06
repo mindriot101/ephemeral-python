@@ -132,7 +132,13 @@ def main():
     parser.add_argument("package", nargs="*")
     parser.add_argument("-r", "--recreate", action="store_true", default=False)
     parser.add_argument("-u", "--update", action="store_true", default=False)
+    parser.add_argument("--show-root", action="store_true", default=False)
     args = parser.parse_args()
+
+    root = Path(xdg_data_home()) / "ephemeral-python-venvs"
+    if args.show_root:
+        print(root)
+        return
 
     all_packages = sorted(
         list(set(["ipython"] + [every.lower() for every in args.package]))
@@ -141,11 +147,7 @@ def main():
     # re-usable environments
     package_list_hash = compute_package_list_hash(all_packages)
 
-    dest = (
-        Path(xdg_data_home())
-        / "ephemeral-python-venvs"
-        / f"ephemeral-python-{package_list_hash}"
-    )
+    dest = root / f"ephemeral-python-{package_list_hash}"
 
     builder = EnvBuilder(
         env_dir=dest, packages=all_packages, recreate=args.recreate, update=args.update
