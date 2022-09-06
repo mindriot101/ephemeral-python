@@ -1,5 +1,7 @@
 # ephemeral python
 
+![CI](https://github.com/mindriot101/ephemeral-python/actions/workflows/python-app.yml/badge.svg)
+
 Create ephemeral IPython sessions with dependencies isolated in virtual
 environments.
 
@@ -35,4 +37,4 @@ In [1]: ...
 
 `pipx install git+https//github.com/mindriot101/ephemeral-python`
 
-vim: ft=72
+vim: tw=72
